@@ -64,18 +64,18 @@ public class CtrlProduct {
         }
     }
 
-    public JSONArray getCategoriesJSON(){
-        JSONArray categoriesJSON = new JSONArray();
-        if (categories.size() == 0) {
-            return categoriesJSON;
+    public JSONArray categoriesJSON(){
+        JSONArray json = new JSONArray();
+        if (categories.isEmpty()) {
+            return json;
         }
         for (Category category : categories) {
             JSONObject categoryJSON = new JSONObject();
             categoryJSON.put("category_id", category.getCategory_id());
             categoryJSON.put("category", category.getCategory());
-            categoriesJSON.put(categoryJSON);
+            json.put(categoryJSON);
         }
-        return categoriesJSON;  
+        return json;  
     }
 
 

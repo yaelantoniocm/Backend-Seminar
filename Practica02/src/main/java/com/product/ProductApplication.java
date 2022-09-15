@@ -20,7 +20,7 @@ public class ProductApplication {
 		categories.createCategory(3, "Línea Blanca");
 		
 		//return categories.toString();
-		return categories.getCategoriesJSON().toString();
+		return categories.categoriesJSON().toString();
 		
 	}
 	
