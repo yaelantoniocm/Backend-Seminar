@@ -1,7 +1,0 @@
-{
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.project.sourcePaths": [
-        "Practica01/src",
-        "Practica03/product/src/main/java/com/product"
-    ]
-}
