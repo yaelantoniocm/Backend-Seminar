@@ -1,2 +1,2 @@
 # Backend-Seminar
-Backend Seminar with professor Jesùs Ivàn Saavedra Martìnez
+Backend Seminar with professor Jesus Ivan Saavedra Martinez
