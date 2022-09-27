@@ -25,19 +25,14 @@ public class Category {
     @Column(name = "category")
     private String category;
 
-
     @Column(name = "status")
     @Min(value = 0, message = "stauts must be 0 or 1")
     @Max(value = 1, message = "stauts must be 0 or 1")
     @JsonIgnore
     private Integer status;
 
-	public Category(Integer category_id, String category, Integer status) {
-		super();
-		this.category_id = category_id;
-		this.category = category;
-		this.status = status;
-	}
+    public Category() {
+    }
 
     public Integer getCategory_id() {
         return category_id;
