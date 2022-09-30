@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.product.api.entity.Category;
 import com.product.api.service.SvcCategory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,19 +27,19 @@ public class CtrlCategory {
     @Autowired
     SvcCategory svcCategory;
 
-    @GetMapping
+    @GetMapping("/categories")
     public ResponseEntity<List<Category>> getCategories() {
         return new ResponseEntity<>(svcCategory.getCategories(), HttpStatus.OK);
     }
 
     // Muestra el category id que se le pasa como parámetro en la URL
-    @GetMapping(path = "/{id}")
-    public Integer readCategory(@PathVariable Integer id) {
-        return id;
+    @GetMapping(path = "/{category_id}")
+    public Integer readCategory(@PathVariable Integer category_id) {
+        return category_id;
     }
 
     // Conseguir la categoria con el id especifico
-    @GetMapping("/category/{category_id}")
+    @GetMapping("/getid/{category_id}")
     public ResponseEntity<Category> getCategory(@PathVariable int category_id) {
         return new ResponseEntity<>(svcCategory.getCategory(category_id), HttpStatus.OK);
     }

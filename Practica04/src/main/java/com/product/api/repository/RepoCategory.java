@@ -17,12 +17,14 @@ public interface RepoCategory extends JpaRepository<Category, Integer> {
     @Query(value = "SELECT * FROM category WHERE status = :status", nativeQuery = true)
     List<Category> findByStatus(@Param("status") Integer status);
 
-    @Query(value = "SELECT * FROM category WHERE status = :category_id AND status = 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM category WHERE category_id = :category_id AND status = 1", nativeQuery = true)
     Category findByCategoryId(@Param("category_id") Integer category_id);
 
-    @Query(value = "SELECT * FROM category WHERE status = :category", nativeQuery = true)
+    @Query(value = "SELECT * FROM category WHERE category = :category", nativeQuery = true)
     Category findByCategory(@Param("category") String category);
 
+    @Modifying
+    @Transactional
     @Query(value = "INSERT INTO category (category,status) VALUES(:category,1)", nativeQuery = true)
     void createCategory(@Param("category") String category);
 

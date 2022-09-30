@@ -28,9 +28,12 @@ public class SvcCategorymp implements SvcCategory {
     public String createCategory(Category category) {
         Category categorySaved = (Category) repoCategory.findByCategory(category.getCategory());
         if (categorySaved != null) {
-            repoCategory.activeCategory(categorySaved.getCategory_id());
-        } else {
-            return "region already exists";
+            if (categorySaved.getStatus() == 0) {
+                repoCategory.activeCategory(categorySaved.getCategory_id());
+            }
+            return "Category already exists";
+            // } else {
+            // return "region already exists";
         }
 
         repoCategory.createCategory(category.getCategory());
