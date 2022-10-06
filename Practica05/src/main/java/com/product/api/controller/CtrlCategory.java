@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.product.api.dto.ApiResponse;
 import com.product.api.entity.Category;
 import com.product.api.service.SvcCategory;
+import com.product.exception.ApiException;
 
 import java.util.List;
 
@@ -48,14 +50,10 @@ public class CtrlCategory {
     // las del inciso a, en caso contrario, muestra el mensaje ’category already
     // exist’.
     @PostMapping(path = "/create")
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category, BindingResult bindingResult) {
-
-        String message = "";
-
+    public ResponseEntity<ApiResponse> createCategory(@Valid @RequestBody Category category,
+            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-
-            message = bindingResult.getAllErrors().get(0).getDefaultMessage();
-            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+            throw new ApiException(HttpStatus.BAD_REQUEST, bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
 
         return new ResponseEntity<>(svcCategory.createCategory(category), HttpStatus.OK);
@@ -64,15 +62,12 @@ public class CtrlCategory {
     // Muestra el mensaje ’category updated’ si se le pasa una categoría de las del
     // inciso a, en caso contrario, muestra el mensaje ’category does not exist’.
     @PutMapping("/update/{category_id}")
-    public ResponseEntity<String> updateCategory(@PathVariable int category_id, @Valid @RequestBody Category category,
+    public ResponseEntity<ApiResponse> updateCategory(@PathVariable int category_id,
+            @Valid @RequestBody Category category,
             BindingResult bindingResult) {
 
-        String message = "";
-
         if (bindingResult.hasErrors()) {
-
-            message = bindingResult.getAllErrors().get(0).getDefaultMessage();
-            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+            throw new ApiException(HttpStatus.BAD_REQUEST, bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
 
         return new ResponseEntity<>(svcCategory.updateCategory(category_id, category), HttpStatus.OK);
@@ -82,7 +77,7 @@ public class CtrlCategory {
     // las del inciso a, en caso contrario, muestra el mensaje ’category does not
     // exist’.
     @DeleteMapping("/delete/{category_id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable int category_id) {
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable int category_id) {
 
         return new ResponseEntity<>(svcCategory.deleteRegion(category_id), HttpStatus.OK);
     }
